@@ -1,16 +1,20 @@
 import pygame
 from abc import ABC, abstractmethod
 
-class GameBehaviour:
+gameobjects = []
+removables = []
 
-    def __init__(self):
-        super().__init__()
-        self.gameobjects = []
+def updateAll():
 
-    def instantiate(self, object):
-        self.gameobjects.append(object)
-
-    def updateAll(self):
-        for object in self.gameobjects:
-            object.update()
-            object.update_components()
+    for r in removables:
+        if r in gameobjects:
+            gameobjects.remove(r)
+    for object in gameobjects:
+        object.update()
+    for object in gameobjects:
+        object.update_components()
+    for object in gameobjects:
+        object.transform.update()
+    for object in gameobjects:
+        object.draw_sprites()
+    

@@ -1,8 +1,9 @@
 import pygame
 from transform import Transform
 import display
+from mono_behaviour import MonoBehaviour
 
-class GameObject:
+class GameObject(MonoBehaviour):
     def __init__(self):
         self.transform = Transform()
         self.components = []
@@ -14,8 +15,16 @@ class GameObject:
         for component in self.components:
             component.update()
 
+    def draw_sprites(self):
+        for component in self.components:
+            component.draw()
+
     def add_component(self, object):
         self.components.append(object)
+
+    def add_components(self, objects):
+        for object in objects:
+            self.components.append(object)
 
     def get_component(self, type):
         for component in self.components:
